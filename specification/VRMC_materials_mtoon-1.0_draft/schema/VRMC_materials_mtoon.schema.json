@@ -1,123 +1,100 @@
 {
-  "title": "VRMC_materials_mtoon",
+  "title": "VRMCMaterialsMToon",
   "type": "object",
-  "description": "",
+  "description": "A set of parameter definition for an MToon material.",
   "properties": {
     "version": {
       "type": "string",
-      "description": "Meta"
+      "description": "Version of an MToon."
     },
-    "renderMode": {
-      "title": "RenderMode",
-      "type": "string",
-      "enum": [
-        "opaque",
-        "cutout",
-        "transparent",
-        "transparentWithZWrite"
-      ],
-      "description": "Rendering"
-    },
-    "cullMode": {
-      "title": "CullMode",
-      "type": "string",
-      "enum": [
-        "off",
-        "front",
-        "back"
-      ]
+    "zWrite": {
+      "type": "boolean",
+      "description": "Specifies whether it should write to depth buffer or not in rasterize-based engines. If it isn't specified, Engine will use the most appropriate value based on alphaMode of the material."
     },
     "renderQueueOffsetNumber": {
       "type": "integer",
-      "description": ""
+      "description": "It will be used to specify the order of rendering. Equivalent of Render Queue in Unity engine. If it isn't specified, Engine will use the most appropriate value based on alphaMode of the material."
     },
     "litFactor": {
       "type": "array",
-      "description": "Color",
+      "description": "A color for lit part. Must be encoded in linear. If litMultiplyTexture is specified, its value will be multiplied by the texel values.",
       "items": {
         "type": "number"
-      }
+      },
+      "minItems": 4,
+      "maxItems": 4,
+      "default": [ 1.0, 1.0, 1.0, 1.0 ]
     },
     "litMultiplyTexture": {
       "type": "integer",
-      "description": ""
+      "description": "A texture for lit part. Must be encoded in sRGB."
     },
     "shadeFactor": {
       "type": "array",
-      "description": "",
+      "description": "A color for shade part. Must be encoded in linear. If shadeMultiplyTexture is specified, its value will be multiplied by the texel values.",
       "items": {
         "type": "number"
-      }
+      },
+      "minItems": 4,
+      "maxItems": 4,
+      "default": [ 1.0, 1.0, 1.0, 1.0 ]
     },
     "shadeMultiplyTexture": {
       "type": "integer",
-      "description": ""
-    },
-    "cutoutThresholdFactor": {
-      "type": "number",
-      "description": ""
+      "description": "A texture for shade part. Must be encoded in sRGB."
     },
     "shadingShiftFactor": {
       "type": "number",
-      "description": "Lighting"
+      "description": "Shade part will be shifted based on this value.",
+      "default": 0.0
     },
     "shadingToonyFactor": {
       "type": "number",
-      "description": ""
-    },
-    "lightColorAttenuationFactor": {
-      "type": "number",
-      "description": ""
+      "description": "Boundary of shade will be sharpened based on this value.",
+      "default": 0.0
     },
     "giIntensityFactor": {
       "type": "number",
-      "description": ""
-    },
-    "normalTexture": {
-      "type": "integer",
-      "description": "Normal"
+      "description": "Specifies how much it should receive global illumination from the scene.",
+      "default": 0.0
     },
     "normalScaleFactor": {
       "type": "number",
-      "description": ""
-    },
-    "emissionFactor": {
-      "type": "array",
-      "description": "Emission",
-      "items": {
-        "type": "number"
-      }
-    },
-    "emissionMultiplyTexture": {
-      "type": "integer",
-      "description": ""
+      "description": "Specifies the scale of normalTexture.",
+      "default": 1.0
     },
     "additiveTexture": {
       "type": "integer",
-      "description": "MatCap"
+      "description": "A texture for MatCap. Must be encoded in sRGB. Will be additive mixed to the result."
     },
     "rimFactor": {
       "type": "array",
-      "description": "Rim",
+      "description": "A color for parametric rim lighting. Must be encoded in linear. If rimMultiplyTexture is specified, its value will be multiplied by the texel values.",
       "items": {
         "type": "number"
-      }
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "default": [ 1.0, 1.0, 1.0 ]
     },
     "rimMultiplyTexture": {
       "type": "integer",
-      "description": ""
+      "description": "A texture for parametric rim lighting. Must be encoded in sRGB."
     },
     "rimLightingMixFactor": {
       "type": "number",
-      "description": ""
+      "description": "Specifies how much it should mix lighting for parametric rim lighting by multiplication.",
+      "default": 0.0
     },
     "rimFresnelPowerFactor": {
       "type": "number",
-      "description": ""
+      "description": "Specifies a broadness of parametric rim lighting.",
+      "default": 1.0
     },
     "rimLiftFactor": {
       "type": "number",
-      "description": ""
+      "description": "Result of parametric rim lighting will be lifted based on this value.",
+      "default": 0.0
     },
     "outlineWidthMode": {
       "title": "OutlineWidthMode",
@@ -127,19 +104,21 @@
         "worldCoordinates",
         "screenCoordinates"
       ],
-      "description": "Outline"
+      "description": "Specifies how it should render outlines.",
+      "default": "none"
     },
     "outlineWidthFactor": {
       "type": "number",
-      "description": ""
+      "description": "A width of outlines. If outlineWidthMultiplyTexture is specified, its value will be multiplied by the texel values.",
+      "default": 0.0
     },
     "outlineWidthMultiplyTexture": {
       "type": "integer",
-      "description": ""
+      "description": "A texture that specifies a multiplier of width of outlines. Must be encoded in linear."
     },
     "outlineScaledMaxDistanceFactor": {
       "type": "number",
-      "description": ""
+      "description": "Specifies a maximum distance to use screen coordinate for calculation of width of outlines. Only effective when outlineWidthMode is screenCoordinates."
     },
     "outlineColorMode": {
       "title": "OutlineColorMode",
@@ -147,48 +126,43 @@
       "enum": [
         "fixedColor",
         "mixedLighting"
-      ]
+      ],
+      "description": "Specifies whether it should mix lighting for outline colors by multiplication or not."
     },
     "outlineFactor": {
       "type": "array",
-      "description": "",
+      "description": "A color for outlines. Must be encoded in linear.",
       "items": {
         "type": "number"
-      }
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "default": [ 0.0, 0.0, 0.0 ]
     },
     "outlineLightingMixFactor": {
       "type": "number",
-      "description": ""
-    },
-    "mainTextureLeftBottomOriginScale": {
-      "type": "array",
-      "description": "TextureUvCoords",
-      "items": {
-        "type": "number"
-      }
-    },
-    "mainTextureLeftBottomOriginOffset": {
-      "type": "array",
-      "description": "",
-      "items": {
-        "type": "number"
-      }
+      "description": "Specifies how much it should mix lighting for outline colors by multiplication. Only effective when outlineColorMode is mixedLighting.",
+      "default": 1.0
     },
     "uvAnimationMaskTexture": {
       "type": "integer",
-      "description": ""
+      "description": "A texture that specifies a multiplier of uv animations. Must be encoded in linear."
     },
     "uvAnimationScrollXSpeedFactor": {
       "type": "number",
-      "description": ""
+      "description": "A speed of uv animation, in S axis. If uvAnimationMaskTexture is specified, its value will be multiplied by the texel values.",
+      "default": 0.0
     },
     "uvAnimationScrollYSpeedFactor": {
       "type": "number",
-      "description": ""
+      "description": "A speed of uv animation, in T axis. If uvAnimationMaskTexture is specified, its value will be multiplied by the texel values.",
+      "default": 0.0
     },
     "uvAnimationRotationSpeedFactor": {
       "type": "number",
-      "description": ""
+      "description": "UV rotates clockwise around the origin in this speed (radians). If uvAnimationMaskTexture is specified, its value will be multiplied by the texel values.",
+      "default": 0.0
     }
-  }
+  },
+  "required": [ "version" ]
 }
