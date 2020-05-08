@@ -15,20 +15,6 @@
       "type": "integer",
       "description": "It will be used to specify the order of rendering. Equivalent of Render Queue in Unity engine. If it isn't specified, Engine will use the most appropriate value based on alphaMode of the material."
     },
-    "litFactor": {
-      "type": "array",
-      "description": "A color for lit part. Must be encoded in linear. If litMultiplyTexture is specified, its value will be multiplied by the texel values.",
-      "items": {
-        "type": "number"
-      },
-      "minItems": 4,
-      "maxItems": 4,
-      "default": [ 1.0, 1.0, 1.0, 1.0 ]
-    },
-    "litMultiplyTexture": {
-      "type": "integer",
-      "description": "A texture for lit part. Must be encoded in sRGB."
-    },
     "shadeFactor": {
       "type": "array",
       "description": "A color for shade part. Must be encoded in linear. If shadeMultiplyTexture is specified, its value will be multiplied by the texel values.",
