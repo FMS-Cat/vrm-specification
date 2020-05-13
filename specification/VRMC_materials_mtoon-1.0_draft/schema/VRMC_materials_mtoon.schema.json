@@ -44,11 +44,6 @@
       "description": "Specifies how much it should receive global illumination from the scene.",
       "default": 0.0
     },
-    "normalScaleFactor": {
-      "type": "number",
-      "description": "Specifies the scale of normalTexture.",
-      "default": 1.0
-    },
     "additiveTexture": {
       "type": "integer",
       "description": "A texture for MatCap. Must be encoded in sRGB. Will be additive mixed to the result."
